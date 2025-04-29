@@ -37,11 +37,11 @@ HAVING condition;
 ```
 
 **Question 1**
-```
+--
 What is the average dosage prescribed for each medication?
 
 Sample tablePrescriptions Table
-
+```
 Medication     AvgDosage
 -------------  ----------
 Ciprofloxacin  500.0
@@ -75,7 +75,7 @@ GROUP BY
 **Question 2**
 ---
 How many patients are there in each city?
-
+```
 Sample table: Patients Table
 
 Address     TotalPatients
@@ -83,6 +83,7 @@ Address     TotalPatients
 Berlin      3
 Chicago     4
 Mexico      3
+```
 ```
 select Address,count(*)
 as TotalPatients
@@ -102,7 +103,7 @@ group by Address
 Write a SQL Query to find how many medications are prescribed for each patient?
 
 Sample table:MedicalRecords Table
-
+```
 PatientID   AvgMedications
 ----------  --------------
 4           5
@@ -110,6 +111,7 @@ PatientID   AvgMedications
 7           1
 8           3
 
+```
 ```
 SELECT PatientID,COUNT(*) AS 
 AvgMedications
@@ -128,7 +130,7 @@ GROUP BY PatientID;
 Write a SQL query to find the maximum purchase amount.
 
 Sample table: orders
-
+```
 ord_no      purch_amt   ord_date    customer_id  salesman_id
 
 ----------  ----------  ----------  -----------  -----------
@@ -138,7 +140,7 @@ ord_no      purch_amt   ord_date    customer_id  salesman_id
 70009       270.65      2012-09-10  3001         5005
 
 70002       65.26       2012-10-05  3002         5001
-
+```
 ```
 SELECT
   MAX(purch_amt) AS MAXIMUM
@@ -158,7 +160,7 @@ FROM
 Write a SQL query to find the total income of employees aged 40 or above.
 
 Table: employee
-
+```
 name        type
 ----------  ----------
 id          INTEGER
@@ -167,6 +169,7 @@ age         INTEGER
 city        TEXT
 income      INTEGER
 
+```
 ```
 SELECT
   SUM(income) AS total_income
@@ -207,7 +210,7 @@ WHERE
 Write a SQL query to find the average length of names for people living in Chennai?
 
 Table: customer
-
+```
 name        type
 ----------  ----------
 id          INTEGER
@@ -215,7 +218,7 @@ name        TEXT
 city        TEXT
 email       TEXT
 phone       INTEGER
-
+```
 ```
 SELECT
   AVG(LENGTH(name)) AS avg_name_length
@@ -236,12 +239,12 @@ WHERE
 Write the SQL query that accomplishes the grouping of data by joining date (jdate), calculates the maximum work hours for each date, and excludes dates where the maximum work hour is not greater than 12.
 
 Sample table: employee1
-
+```
 jdate       MAX(workhour)
 ----------  -------------
 2004.0      15
 2006.0      15
-
+```
 ```
 SELECT
   jdate,
@@ -265,14 +268,14 @@ HAVING
 Write the SQL query that achieves the grouping of data by occupation, calculates the total work hours for each occupation, and excludes occupations where the total work hour sum is not greater than 20.
 
 Sample table: employee1
-
+```
 occupation  SUM(workhour)
 ----------  -------------
 Business    30
 Doctor      30
 Engineer    24
 Teacher     27
-
+```
 ```
 SELECT
   occupation,
@@ -297,12 +300,12 @@ Write the SQL query that achieves the grouping of data by occupation, calculates
 
 Sample table: employee1
 
-Result
+```
 occupation  AVG(workhour)
 ----------  -------------
 Business    10.0
 Engineer    12.0
-
+```
 ```
 SELECT
   occupation,
