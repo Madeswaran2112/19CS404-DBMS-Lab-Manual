@@ -37,28 +37,40 @@ HAVING condition;
 ```
 
 **Question 1**
---
--- Paste Question 1 here
+```
+What is the average dosage prescribed for each medication?
+```
 
-```sql
--- Paste your SQL code below for Question 1
+```
+SELECT
+  Medication,
+  AVG(Dosage) AS AvgDosage
+FROM
+  Prescriptions
+GROUP BY
+  Medication;
+
 ```
 
 **Output:**
 
-![Output1](output.png)
+![Screenshot 2025-04-29 171159](https://github.com/user-attachments/assets/cbf06455-04ba-4d64-899c-19b9f6285e48)
 
 **Question 2**
 ---
--- Paste Question 2 here
+How many patients are there in each city?
 
-```sql
--- Paste your SQL code below for Question 2
+Sample table: Patients Table
+```
+select Address,count(*)
+as TotalPatients
+from Patients
+group by Address
 ```
 
 **Output:**
 
-![Output2](output.png)
+
 
 **Question 3**
 ---
