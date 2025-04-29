@@ -69,6 +69,7 @@ GROUP BY
 
 **Output:**
 
+
 ![Screenshot 2025-04-29 171159](https://github.com/user-attachments/assets/cbf06455-04ba-4d64-899c-19b9f6285e48)
 
 **Question 2**
@@ -90,6 +91,8 @@ group by Address
 ```
 
 **Output:**
+
+
 ![Screenshot 2025-04-29 171804](https://github.com/user-attachments/assets/8d4957fe-fb4f-4c02-a28e-1f6c65c3430c)
 
 
@@ -115,6 +118,8 @@ GROUP BY PatientID;
 ```
 
 **Output:**
+
+
 ![Screenshot 2025-04-29 172124](https://github.com/user-attachments/assets/03cd9d50-06b5-4812-9c53-729d7557944f)
 
 
@@ -142,6 +147,8 @@ FROM
 ```
 
 **Output:**
+
+
 ![Screenshot 2025-04-29 172220](https://github.com/user-attachments/assets/3b0552ba-cb0f-47b2-a14f-4f41e3f13b8a)
 
 
@@ -171,6 +178,7 @@ WHERE
 
 **Output:**
 
+
 ![Screenshot 2025-04-29 172310](https://github.com/user-attachments/assets/7dd0627c-5b47-45cd-9da2-b4c8b2308c33)
 
 
@@ -190,6 +198,8 @@ WHERE
 ```
 
 **Output:**
+
+
 ![Screenshot 2025-04-29 172421](https://github.com/user-attachments/assets/facbdbb0-4fdf-4680-a2f2-05496c32ebde)
 
 **Question 7**
@@ -216,6 +226,8 @@ WHERE
 ```
 
 **Output:**
+
+
 ![Screenshot 2025-04-29 172506](https://github.com/user-attachments/assets/d162dc9e-2f89-4e8d-ace5-ffa4b385b7bb)
 
 
@@ -243,6 +255,8 @@ HAVING
 ```
 
 **Output:**
+
+
 ![Screenshot 2025-04-29 172603](https://github.com/user-attachments/assets/4f18be9a-1667-4bc1-825b-115d62e6f1c9)
 
 
@@ -272,6 +286,8 @@ HAVING
 ```
 
 **Output:**
+
+
 ![Screenshot 2025-04-29 172703](https://github.com/user-attachments/assets/ed11db98-a58b-4cb2-934b-49a26899d26b)
 
 
@@ -300,6 +316,8 @@ HAVING
 ```
 
 **Output:**
+
+
 ![Screenshot 2025-04-29 172754](https://github.com/user-attachments/assets/2feda0d6-0e59-4af8-a0b6-15ea0c411c22)
 
 
