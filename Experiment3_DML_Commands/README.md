@@ -1,169 +1,305 @@
-# Experiment 3: DML Commands
+# Experiment 2: DDL Commands
 
 ## AIM
-To study and implement DML (Data Manipulation Language) commands.
+To study and implement DDL commands and different types of constraints.
 
 ## THEORY
 
-### 1. INSERT INTO
-Used to add records into a relation.
-These are three type of INSERT INTO queries which are as
-A)Inserting a single record
-**Syntax (Single Row):**
-```sql
-INSERT INTO table_name (field_1, field_2, ...) VALUES (value_1, value_2, ...);
-```
-**Syntax (Multiple Rows):**
-```sql
-INSERT INTO table_name (field_1, field_2, ...) VALUES
-(value_1, value_2, ...),
-(value_3, value_4, ...);
-```
-**Syntax (Insert from another table):**
-```sql
-INSERT INTO table_name SELECT * FROM other_table WHERE condition;
-```
-### 2. UPDATE
-Used to modify records in a relation.
-Syntax:
-```sql
-UPDATE table_name SET column1 = value1, column2 = value2 WHERE condition;
-```
-### 3. DELETE
-Used to delete records from a relation.
-**Syntax (All rows):**
-```sql
-DELETE FROM table_name;
-```
-**Syntax (Specific condition):**
-```sql
-DELETE FROM table_name WHERE condition;
-```
-### 4. SELECT
-Used to retrieve records from a table.
+### 1. CREATE
+Used to create a new relation (table).
+
 **Syntax:**
 ```sql
-SELECT column1, column2 FROM table_name WHERE condition;
+CREATE TABLE (
+  field_1 data_type(size),
+  field_2 data_type(size),
+  ...
+);
 ```
+### 2. ALTER
+Used to add, modify, drop, or rename fields in an existing relation.
+(a) ADD
+```sql
+ALTER TABLE std ADD (Address CHAR(10));
+```
+(b) MODIFY
+```sql
+ALTER TABLE relation_name MODIFY (field_1 new_data_type(size));
+```
+(c) DROP
+```sql
+ALTER TABLE relation_name DROP COLUMN field_name;
+```
+(d) RENAME
+```sql
+ALTER TABLE relation_name RENAME COLUMN old_field_name TO new_field_name;
+```
+### 3. DROP TABLE
+Used to permanently delete the structure and data of a table.
+```sql
+DROP TABLE relation_name;
+```
+### 4. RENAME
+Used to rename an existing database object.
+```sql
+RENAME TABLE old_relation_name TO new_relation_name;
+```
+### CONSTRAINTS
+Constraints are used to specify rules for the data in a table. If there is any violation between the constraint and the data action, the action is aborted by the constraint. It can be specified when the table is created (using CREATE TABLE) or after it is created (using ALTER TABLE).
+### 1. NOT NULL
+When a column is defined as NOT NULL, it becomes mandatory to enter a value in that column.
+Syntax:
+```sql
+CREATE TABLE Table_Name (
+  column_name data_type(size) NOT NULL
+);
+```
+### 2. UNIQUE
+Ensures that values in a column are unique.
+Syntax:
+```sql
+CREATE TABLE Table_Name (
+  column_name data_type(size) UNIQUE
+);
+```
+### 3. CHECK
+Specifies a condition that each row must satisfy.
+Syntax:
+```sql
+CREATE TABLE Table_Name (
+  column_name data_type(size) CHECK (logical_expression)
+);
+```
+### 4. PRIMARY KEY
+Used to uniquely identify each record in a table.
+Properties:
+Must contain unique values.
+Cannot be null.
+Should contain minimal fields.
+Syntax:
+```sql
+CREATE TABLE Table_Name (
+  column_name data_type(size) PRIMARY KEY
+);
+```
+### 5. FOREIGN KEY
+Used to reference the primary key of another table.
+Syntax:
+```sql
+CREATE TABLE Table_Name (
+  column_name data_type(size),
+  FOREIGN KEY (column_name) REFERENCES other_table(column)
+);
+```
+### 6. DEFAULT
+Used to insert a default value into a column if no value is specified.
+
+Syntax:
+```sql
+CREATE TABLE Table_Name (
+  col_name1 data_type,
+  col_name2 data_type,
+  col_name3 data_type DEFAULT 'default_value'
+);
+```
+
 **Question 1**
 --
--- Paste Question 1 here
+Create a new table named item with the following specifications and constraints:
+    item_id as TEXT and as primary key.
+    item_desc as TEXT.
+    rate as INTEGER.
+    icom_id as TEXT with a length of 4.
+    icom_id is a foreign key referencing com_id in the company table.
+    The foreign key should set NULL on updates and deletes.
+    item_desc and rate should not accept NULL.
 
 ```sql
--- Paste your SQL code below for Question 1
+CREATE TABLE item(
+    item_id TEXT PRIMARY KEY,
+    item_desc TEXT NOT NULL,
+    rate INTEGER NOT NULL,
+    icom_id TEXT CHECK(LENGTH(icom_id)=4),
+    FOREIGN KEY (icom_id) REFERENCES company(com_id)
+    ON DELETE SET NULL 
+    ON UPDATE SET NULL
+);
 ```
 
 **Output:**
 
-![Output1](output.png)
+![image](https://github.com/user-attachments/assets/2eebfa33-e414-40c2-9965-f774fbd762ca)
+
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+Insert all products from Discontinued_products into Products.
+Table attributes are ProductID, ProductName, Price, Stock
 
 ```sql
--- Paste your SQL code below for Question 2
+insert into Products(ProductID, ProductName, Price, Stock)
+SELECT * FROM Discontinued_products; 
 ```
 
 **Output:**
 
-![Output2](output.png)
+![image](https://github.com/user-attachments/assets/7edc5ec7-c274-4173-9d29-be2f37264084)
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+Create a table named Employees with the following constraints:
+
+EmployeeID should be the primary key.
+FirstName and LastName should be NOT NULL.
+Email should be unique.
+Salary should be greater than 0.
+DepartmentID should be a foreign key referencing the Departments table.
 
 ```sql
--- Paste your SQL code below for Question 3
+create table Employees(
+EmployeeID int primary key,
+FirstName text not null,
+LastName text not null,
+Salary int check(salary>0),
+Email text unique,
+DepartmentID int,
+foreign key (DepartmentID) references Departments(DepartmentID)
+);
 ```
 
 **Output:**
 
-![Output3](output.png)
+![image](https://github.com/user-attachments/assets/1adf1535-cc33-4e8c-bdb3-c13211382312)
+
 
 **Question 4**
 ---
--- Paste Question 4 here
-
+Insert a student with RollNo 201, Name David Lee, Gender M, Subject Physics, and MARKS 92 into the Student_details table
 ```sql
--- Paste your SQL code below for Question 4
+insert into Student_details(RollNo,Name,Gender,Subject,MARKS)values(201,'David Lee','M','Physics',92)
 ```
 
 **Output:**
 
-![Output4](output.png)
+![image](https://github.com/user-attachments/assets/2e6a5949-c3e0-4840-a395-b7f35ba90b10)
 
 **Question 5**
 ---
--- Paste Question 5 here
+
+Create a table named Members with the following columns:
+
+MemberID as INTEGER
+MemberName as TEXT
+JoinDate as DATE
 
 ```sql
--- Paste your SQL code below for Question 5
+create table Members(
+MemberID INTEGER,
+MemberName TEXT,
+JoinDate DATE);
 ```
 
 **Output:**
 
-![Output5](output.png)
+![image](https://github.com/user-attachments/assets/b94e86a9-4b62-4e4a-b1fd-f93cf5b9d677)
 
 **Question 6**
 ---
--- Paste Question 6 here
+Write an SQL query to change the name of the column id to employee_id in the table employee.
 
 ```sql
--- Paste your SQL code below for Question 6
+alter table employee  rename id to employee_id; 
 ```
 
 **Output:**
 
-![Output6](output.png)
+![image](https://github.com/user-attachments/assets/f03e7c20-39ca-4084-9ce8-a64981818a5b)
 
 **Question 7**
 ---
--- Paste Question 7 here
-
+Create a table named Attendance with the following constraints:
+AttendanceID as INTEGER should be the primary key.
+EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
+AttendanceDate as DATE.
+Status as TEXT should be one of 'Present', 'Absent', 'Leave'.
 ```sql
--- Paste your SQL code below for Question 7
+create table Attendance(
+    AttendanceID INTEGER PRIMARY KEY,
+    EmployeeID INTEGER,
+    AttendanceDate DATE,
+    Status TEXT ,
+    foreign key (EmployeeID) references  Employees(EmployeeID),
+    CHECK(Status IN ('Present','Absent','Leave'))
+);
 ```
 
 **Output:**
 
-![Output7](output.png)
+![image](https://github.com/user-attachments/assets/a78faf98-d2de-4a5b-b892-219f87d96a7f)
 
 **Question 8**
 ---
--- Paste Question 8 here
+Insert the following products into the Products table:
 
+Name        Category     Price       Stock<br/>
+----------  -----------  ----------  ----------<br/>
+Smartphone  Electronics  800         150<br/>
+Headphones  Accessories  200         300<br/>
 ```sql
--- Paste your SQL code below for Question 8
+insert into Products(Name,Category,Price,Stock)values('Smartphone','Electronics',800,150),('Headphones','Accessories',200,300);
 ```
 
 **Output:**
 
-![Output8](output.png)
+![image](https://github.com/user-attachments/assets/be52dd8d-1198-46a3-a0c0-42a01ce48691)
 
 **Question 9**
 ---
--- Paste Question 9 here
+
+Write a SQL query to add birth_date attribute as timestamp (datatype) in the table customer 
+
+Sample table: customer
+
+ customer_id |   cust_name    |    city    | grade | salesman_id <br/>
+-------------+----------------+------------+-------+-------------<br/>
+        3002 | Nick Rimando   | New York   |   100 |        5001<br/>
+        3007 | Brad Davis     | New York   |   200 |        5001<br/>
+        3005 | Graham Zusi    | California |   200 |        5002<br/>
 
 ```sql
--- Paste your SQL code below for Question 9
+alter table customer add birth_date timestamp;
 ```
 
 **Output:**
 
-![Output9](output.png)
+![image](https://github.com/user-attachments/assets/b17d1491-6ca4-4208-9db7-c4f7390468e3)
 
 **Question 10**
 ---
--- Paste Question 10 here
+
+Write a SQL query to Add a new column Country as text in the Student_details table.
+
+Sample table: Student_details
+
+ cid              name             type   notnull     dflt_value  pk <br/>
+---------------  ---------------  -----  ----------  ----------  ----------<br/>
+0                RollNo           int    0                       1<br/>
+1                Name             VARCH  1                       0<br/>
+2                Gender           TEXT   1                       0<br/>
+3                Subject          VARCH  0                       0<br/>
+4                MARKS            INT (  0                       0<br/>
 
 ```sql
--- Paste your SQL code below for Question 10
+
+alter table Student_details add Country TEXT;
 ```
 
 **Output:**
 
-![Output10](output.png)
+![image](https://github.com/user-attachments/assets/d77662df-626a-4c27-90d9-4f8487ba882e)
+
 
 ## RESULT
-Thus, the SQL queries to implement DML commands have been executed successfully.
+Thus, the SQL queries to implement different types of constraints and DDL commands have been executed successfully.
